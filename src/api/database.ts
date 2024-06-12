@@ -1,19 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
+import { type RecipeDataState } from '../utils/type';
 
-export interface RecipeData {
-  id: string;
-  title: string;
-  description: string;
-  video: string;
-  img: string;
-  prepTime: '0-15' | '16-30' | '31-45' | '46-60';
-  cookTime: '0-15' | '16-30' | '31-45' | '46-60';
-  serves: '1-2' | '3-4' | '5-6' | '6+';
-  ingredients: string;
-  instructions: string;
-}
-
-const database: RecipeData[] = [
+const database: RecipeDataState[] = [
   {
     id: uuidv4(),
     title: 'Salmon Prawn Risotto',

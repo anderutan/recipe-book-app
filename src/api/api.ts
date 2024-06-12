@@ -1,17 +1,6 @@
 import database from './database';
 import { v4 as uuidv4 } from 'uuid';
-
-interface UpdateRecipeType {
-  title: string;
-  description: string;
-  video: string;
-  img: string;
-  prepTime: '0-15' | '16-30' | '31-45' | '46-60';
-  cookTime: '0-15' | '16-30' | '31-45' | '46-60';
-  serves: '1-2' | '3-4' | '5-6' | '6+';
-  ingredients: string;
-  instructions: string;
-}
+import { type UpdateRecipeType } from '../utils/type';
 
 export const getRecipes = () =>
   new Promise((resolve, reject) => {
@@ -27,7 +16,7 @@ export const getRecipes = () =>
 
 export const getSpecificRecipe = (id: string) =>
   new Promise((resolve, reject) => {
-    const recipe = database.find((rec) => rec.id === id);
+    const recipe = database.find((recipe) => recipe.id === id);
 
     if (!recipe) {
       return setTimeout(() => {
@@ -66,6 +55,21 @@ export const updateRecipe = (id: string, data: UpdateRecipeType) =>
     database[recipeIndex] = updateRecipe;
 
     return setTimeout(() => {
+      resolve(true);
+    }, 250);
+  });
+
+export const deleteRecipe = (id: string) =>
+  new Promise((resolve, reject) => {
+    const recipeIndex = database.findIndex((recipe) => recipe.id === id);
+    if (recipeIndex === -1) {
+      return setTimeout(() => {
+        reject(new Error('Recipe not found'));
+      }, 250);
+    }
+    database.splice(recipeIndex, 1);
+
+    setTimeout(() => {
       resolve(true);
     }, 250);
   });
