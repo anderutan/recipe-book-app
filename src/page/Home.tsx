@@ -1,9 +1,5 @@
-import React from 'react';
-
-type Props = {};
-
-const Home = (props: Props) => {
-  return <div>Home</div>;
+const Home = () => {
+  return <div>test</div>;
 };
 
 export default Home;
