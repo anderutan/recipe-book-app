@@ -16,15 +16,15 @@ export const getRecipes = () =>
 
 export const getSpecificRecipe = (id: string) =>
   new Promise((resolve, reject) => {
-    const recipe = database.find((recipe) => recipe.id === id);
+    const specificRecipe = database.find((recipe) => recipe.id === id);
 
-    if (!recipe) {
+    if (!specificRecipe) {
       return setTimeout(() => {
         reject(new Error('Recipe not found'));
       }, 250);
     }
     setTimeout(() => {
-      resolve(recipe);
+      resolve(specificRecipe);
     }, 250);
   });
 

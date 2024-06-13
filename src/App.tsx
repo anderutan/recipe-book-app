@@ -3,15 +3,18 @@ import Home from './page/Home';
 import Recipe from './page/Recipe';
 import EditRecipe from './page/EditRecipe';
 import NotFound from './page/NotFound';
+import { RecipeProvider } from './context/RecipeContext';
 
 function App() {
   return (
-    <Routes>
-      <Route index element={<Home />} />
-      <Route path='/:id' element={<Recipe />} />
-      <Route path='/newrecipe' element={<EditRecipe />} />
-      <Route path='*' element={<NotFound />} />
-    </Routes>
+    <RecipeProvider>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path='/recipe/:id' element={<Recipe />} />
+        <Route path='/newrecipe' element={<EditRecipe />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </RecipeProvider>
   );
 }
 
