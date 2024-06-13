@@ -31,3 +31,10 @@ export interface UpdateRecipeType {
   ingredients: string;
   instructions: string;
 }
+
+export interface RecipeState {
+  recipes: RecipeDataState[];
+  currentRecipe: RecipeDataState | null;
+  loading: boolean;
+  error: string | null;
+}

@@ -1,11 +1,4 @@
-import { type Action, RecipeDataState } from './type';
-
-interface RecipeState {
-  recipes: RecipeDataState[];
-  currentRecipe: RecipeDataState | null;
-  loading: boolean;
-  error: string | null;
-}
+import { type Action, RecipeState } from './type';
 
 const initialState: RecipeState = {
   recipes: [],
