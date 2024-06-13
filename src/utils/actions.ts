@@ -45,7 +45,7 @@ export const fetchSpecificRecipe = async (
 
 export const createRecipe = async (
   dispatch: Dispatch<Action>,
-  data: RecipeDataState
+  data: UpdateRecipeType
 ) => {
   try {
     const newRecipe = await createNewRecipe(data);
@@ -81,7 +81,9 @@ export const deleteRecipeData = async (
   try {
     await deleteRecipe(id);
     dispatch({ type: 'DELETE_RECIPES_SUCCESS', payload: id });
+    return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 };

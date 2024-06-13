@@ -38,7 +38,7 @@ export const createNewRecipe = (data: UpdateRecipeType) =>
     database.unshift(newRecipe);
 
     setTimeout(() => {
-      resolve(true);
+      resolve(newRecipe);
     }, 250);
   });
 

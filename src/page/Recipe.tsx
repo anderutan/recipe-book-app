@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { RecipeContext } from '../context/RecipeContext';
-import { fetchSpecificRecipe } from '../utils/actions';
+import { deleteRecipeData, fetchSpecificRecipe } from '../utils/actions';
 import CircularLoading from '../components/CircularLoading';
 import RecipeInfo from '../components/RecipeInfo';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -9,6 +9,20 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const Recipe = () => {
   const { id } = useParams();
   const { state, dispatch } = useContext(RecipeContext);
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    if (id) {
+      const success: boolean = await deleteRecipeData(dispatch, id);
+      if (success) {
+        navigate('/');
+      }
+    }
+  };
+
+  const handleEdit = () => {
+    navigate(`/recipe/${id}/edit`);
+  };
 
   useEffect(() => {
     id && fetchSpecificRecipe(dispatch, id);
@@ -54,6 +68,10 @@ const Recipe = () => {
                 </li>
               ))}
             </ol>
+          </div>
+          <div>
+            <button onClick={handleEdit}>Edit Recipe</button>
+            <button onClick={handleDelete}>Delete Recipe</button>
           </div>
         </article>
       )}

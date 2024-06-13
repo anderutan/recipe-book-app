@@ -1,51 +1,29 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { type UpdateRecipeType } from '../utils/type';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { RecipeContext } from '../context/RecipeContext';
-import { fetchSpecificRecipe, updateRecipeData } from '../utils/actions';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { createRecipe } from '../utils/actions';
+import { Link, useNavigate } from 'react-router-dom';
 
-const EditRecipe = () => {
-  const { id } = useParams<{ id: string }>();
-  const { state, dispatch } = useContext(RecipeContext);
-  const navigate = useNavigate();
-
+const NewRecipe = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm<UpdateRecipeType>();
 
-  useEffect(() => {
-    if (id) {
-      fetchSpecificRecipe(dispatch, id);
-    }
-  }, [dispatch, id]);
+  const { dispatch } = useContext(RecipeContext);
 
-  useEffect(() => {
-    if (state.currentRecipe) {
-      setValue('title', state.currentRecipe.title);
-      setValue('description', state.currentRecipe.description);
-      setValue('video', state.currentRecipe.video);
-      setValue('img', state.currentRecipe.img);
-      setValue('prepTime', state.currentRecipe.prepTime);
-      setValue('cookTime', state.currentRecipe.cookTime);
-      setValue('serves', state.currentRecipe.serves);
-      setValue('ingredients', state.currentRecipe.ingredients);
-      setValue('instructions', state.currentRecipe.instructions);
-    }
-  }, [state.currentRecipe, setValue]);
+  const navigate = useNavigate();
 
-  const handleUpdateRecipe = (data: UpdateRecipeType) => {
-    if (id) {
-      updateRecipeData(dispatch, id, data);
-    }
+  const handleCreateRecipe = (data: UpdateRecipeType) => {
+    createRecipe(dispatch, data);
   };
 
   const onSubmit: SubmitHandler<UpdateRecipeType> = (data) => {
-    handleUpdateRecipe(data);
-    navigate(`/recipe/${id}`);
+    console.log(data);
+    handleCreateRecipe(data);
+    navigate('/');
   };
 
   return (
@@ -155,11 +133,11 @@ const EditRecipe = () => {
       </label>
 
       <div>
-        <Link to={`/recipe/${id}`}>Cancel</Link>
-        <button type='submit'>Update Recipe</button>
+        <Link to='/'>Cancel</Link>
+        <input type='submit' />
       </div>
     </form>
   );
 };
 
-export default EditRecipe;
+export default NewRecipe;
