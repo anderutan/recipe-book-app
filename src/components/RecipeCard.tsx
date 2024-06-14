@@ -19,7 +19,7 @@ const RecipeCard = ({ recipe }: Props) => {
   const { width } = useWindowDimensions();
   return (
     <Card className='max-w-[400px] shadow-lg sm:w-full sm:max-w-screen-lg sm:flex sm:items-center'>
-      <CardHeader className='sm:flex-1'>
+      <CardHeader>
         <img
           src={recipe.img}
           alt={recipe.title}
@@ -31,7 +31,7 @@ const RecipeCard = ({ recipe }: Props) => {
           }
         />
       </CardHeader>
-      <div className='sm:max-w-sm sm:mr-10'>
+      <div className='sm:max-w-[350px] sm:pl-5'>
         <CardContent>
           <CardTitle className='font-lora text-3xl tracking-wide font-semibold mb-2 sm:text-4xl'>
             {recipe.title}
