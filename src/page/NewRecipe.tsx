@@ -35,13 +35,15 @@ const NewRecipe = () => {
   const inputErrorClass = 'ring-1 ring-red-400 text-red-400';
   const ErrorMessage = ({ message }: { message: string }) => {
     return (
-      <span className='text-xs capitalize text-red-400 mb-1'>{message}</span>
+      <span className='text-xs sm:text-base capitalize text-red-400 mb-1'>
+        {message}
+      </span>
     );
   };
 
   return (
-    <section className='w-full h-full min-h-screen max-w-screen-lg mx-auto py-10 px-6'>
-      <h2 className='font-lora text-4xl font-semibold mb-5 sm:text-5xl'>
+    <section className='w-full h-full min-h-screen max-w-screen-sm mx-auto py-10 px-6 bg-slate-200 rounded-lg my-10'>
+      <h2 className='font-lora text-4xl font-semibold mb-5 text-center sm:text-5xl'>
         Create New Recipe
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
@@ -103,18 +105,20 @@ const NewRecipe = () => {
           id='image'
         />
 
-        <section className='grid grid-cols-2 gap-5 mb-5'>
+        <section className='grid grid-cols-2 gap-5 mb-5 sm:grid-cols-3 items-center'>
           <div>
             <Label htmlFor='prepareTime'>
-              <p>
+              <p className='mb-2'>
                 Prepare Time{' '}
-                <span className='text-xs lowercase'>(Minutes)</span>
+                <span className='text-xs sm:text-base lowercase'>
+                  (Minutes)
+                </span>
               </p>
             </Label>
             <select
               {...register('prepTime', { required: true })}
               id='prepareTime'
-              className='px-6 py-3'
+              className='px-6 py-3 w-full sm:text-lg'
             >
               <option value='0-15'>0 - 15</option>
               <option value='16-30'>16 - 30</option>
@@ -125,14 +129,17 @@ const NewRecipe = () => {
 
           <div>
             <Label htmlFor='cookTime'>
-              <p>
-                Cook Time <span className='text-xs lowercase'>(Minutes)</span>
+              <p className='mb-2'>
+                Cook Time{' '}
+                <span className='text-xs sm:text-base lowercase'>
+                  (Minutes)
+                </span>
               </p>
             </Label>
             <select
               {...register('cookTime', { required: true })}
               id='cookTime'
-              className='px-6 py-3'
+              className='px-6 py-3 w-full sm:text-lg'
             >
               <option value='0-15'>0 - 15</option>
               <option value='16-30'>16 - 30</option>
@@ -143,12 +150,17 @@ const NewRecipe = () => {
 
           <div>
             <Label htmlFor='serves'>
-              <p>Serves</p>
+              <p className='mb-2'>
+                Serves{' '}
+                <span className='text-xs sm:text-base lowercase'>
+                  (No of People)
+                </span>
+              </p>
             </Label>
             <select
               {...register('serves', { required: true })}
               id='serves'
-              className='px-6 py-3'
+              className='px-6 py-3 w-full sm:text-lg'
             >
               <option value='1-2'>1 - 2</option>
               <option value='3-4'>3 - 4</option>
@@ -164,7 +176,7 @@ const NewRecipe = () => {
         >
           <p className={errors.ingredients && titleErrorClass}>
             Ingredients{' '}
-            <span className='text-xs lowercase'>
+            <span className='text-xs sm:text-base lowercase'>
               (Enter ingredients separate by ;)
             </span>
           </p>
@@ -185,7 +197,7 @@ const NewRecipe = () => {
         >
           <p className={errors.instructions && titleErrorClass}>
             Instructions{' '}
-            <span className='text-xs lowercase'>
+            <span className='text-xs sm:text-base lowercase'>
               (Enter instructions separate by ;)
             </span>
           </p>
@@ -202,11 +214,11 @@ const NewRecipe = () => {
 
         <div className='flex justify-center gap-5'>
           <Link to='/'>
-            <Button variant='destructive' size='lg'>
+            <Button variant='destructive' size='xl'>
               Cancel
             </Button>
           </Link>
-          <Button type='submit' size='lg'>
+          <Button type='submit' size='xl'>
             Submit
           </Button>
         </div>

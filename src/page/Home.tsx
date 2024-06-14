@@ -42,7 +42,7 @@ const Home = () => {
           value={searchTerm}
           onChange={handleSearch}
           placeholder='Search recipes...'
-          className='border border-slate-400 '
+          className='border border-slate-400 mb-0'
         />
         <Link to='/newrecipe'>
           <Button type='submit' className='px-5'>
