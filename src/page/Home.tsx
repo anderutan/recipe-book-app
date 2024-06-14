@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { ChangeEvent, useContext, useEffect } from 'react';
 import { fetchRecipe } from '../utils/actions';
 import RecipeCard from '../components/RecipeCard';
 import { RecipeContext } from '../context/RecipeContext';
@@ -10,7 +10,7 @@ const Home = () => {
   const searchTerm = searchParams.get('name') || '';
   const { state, dispatch } = useContext(RecipeContext);
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.value;
     if (name) {
       setSearchParams({ name });
@@ -31,7 +31,9 @@ const Home = () => {
 
   return (
     <main className='w-full h-screen flex flex-col gap-5 items-center py-10 relative'>
-      <h1>My Recipe Book</h1>
+      <h1 className='font-lora text-4xl font-semibold mb-2 sm:text-5xl sm:mb-5'>
+        My Recipe Book
+      </h1>
       {loading && <CircularLoading />}
       {error && <p>{error}</p>}
       {filteredRecipes.map((recipe) => (
