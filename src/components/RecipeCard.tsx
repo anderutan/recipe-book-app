@@ -18,7 +18,7 @@ type Props = {
 const RecipeCard = ({ recipe }: Props) => {
   const { width } = useWindowDimensions();
   return (
-    <Card className='max-w-[400px] shadow-lg sm:w-full sm:max-w-screen-lg sm:flex sm:items-center'>
+    <Card className='max-w-[400px] shadow-lg sm:max-w-screen-lg sm:flex sm:items-center'>
       <CardHeader>
         <img
           src={recipe.img}

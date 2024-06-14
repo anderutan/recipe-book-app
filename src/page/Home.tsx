@@ -36,13 +36,13 @@ const Home = () => {
       <h1 className='font-lora text-4xl font-semibold mb-2 sm:text-5xl sm:mb-5'>
         My Recipe Book
       </h1>
-      <div className='flex w-full  items-center space-x-2 max-sm:fixed max-sm:bottom-5 max-sm:px-5 max-sm:max-w-[400px]'>
+      <div className='flex w-full items-center space-x-2 max-sm:fixed max-sm:bottom-5 max-sm:px-5 max-sm:max-w-[400px]'>
         <Input
           type='text'
           value={searchTerm}
           onChange={handleSearch}
           placeholder='Search recipes...'
-          className='border border-slate-400'
+          className='border border-slate-400 '
         />
         <Link to='/newrecipe'>
           <Button type='submit' className='px-5'>

@@ -4,6 +4,10 @@ import { useContext } from 'react';
 import { RecipeContext } from '../context/RecipeContext';
 import { createRecipe } from '../utils/actions';
 import { Link, useNavigate } from 'react-router-dom';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 const NewRecipe = () => {
   const {
@@ -22,121 +26,192 @@ const NewRecipe = () => {
 
   const onSubmit: SubmitHandler<UpdateRecipeType> = (data) => {
     console.log(data);
-    handleCreateRecipe(data);
-    navigate('/');
+    // handleCreateRecipe(data);
+    // navigate('/');
+  };
+
+  const labelErrorClass = 'mb-0';
+  const titleErrorClass = 'font-bold text-red-400';
+  const inputErrorClass = 'ring-1 ring-red-400 text-red-400';
+  const ErrorMessage = ({ message }: { message: string }) => {
+    return (
+      <span className='text-xs capitalize text-red-400 mb-1'>{message}</span>
+    );
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
-      <label htmlFor='title'>
-        <p>Title</p>
-        {errors.title && <span>This field is required</span>}
-        <input
+    <section className='w-full h-full min-h-screen max-w-screen-lg mx-auto py-10 px-6'>
+      <h2 className='font-lora text-4xl font-semibold mb-5 sm:text-5xl'>
+        Create New Recipe
+      </h2>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
+        <Label htmlFor='title' className={errors.title && labelErrorClass}>
+          <p className={errors.title && titleErrorClass}>Title</p>
+        </Label>
+        {errors.title && <ErrorMessage message={'Please name your recipe'} />}
+        <Input
           type='text'
           placeholder='Please state the recipe name'
           {...register('title', { required: true })}
-          className='border-2'
+          className={errors.title && inputErrorClass}
           id='title'
         />
-      </label>
 
-      <label htmlFor='description'>
-        <p>Description</p>
-        {errors.description && <span>This field is required</span>}
-        <textarea
+        <Label
+          htmlFor='description'
+          className={errors.description && labelErrorClass}
+        >
+          <p className={errors.description && titleErrorClass}>Description</p>
+        </Label>
+        {errors.description && (
+          <ErrorMessage
+            message={'Please give your recipe a short description'}
+          />
+        )}
+        <Textarea
           {...register('description', { required: true })}
-          className='border-2'
+          placeholder='Please state the recipe description'
+          className={errors.description && inputErrorClass}
           id='description'
         />
-      </label>
 
-      <label htmlFor='video'>
-        <p>Video (link)</p>
-        {errors.video && <span>This field is required</span>}
-        <input
+        <Label htmlFor='video' className={errors.video && labelErrorClass}>
+          <p className={errors.video && titleErrorClass}>Video Link</p>
+        </Label>
+        {errors.video && (
+          <ErrorMessage message={'Please provide recipe video link'} />
+        )}
+        <Input
           type='text'
-          placeholder='video'
+          placeholder='Video link'
           {...register('video', { required: true })}
-          className='border-2'
+          className={errors.video && inputErrorClass}
           id='video'
         />
-      </label>
 
-      <label htmlFor='image'>
-        <p>Image (link)</p>
-        {errors.img && <span>This field is required</span>}
-        <input
+        <Label htmlFor='image' className={errors.img && labelErrorClass}>
+          <p className={errors.img && titleErrorClass}>Image Link</p>
+        </Label>
+        {errors.img && (
+          <ErrorMessage message={'Please provide recipe image link'} />
+        )}
+        <Input
           type='text'
-          placeholder='img'
+          placeholder='Image link'
           {...register('img', { required: true })}
-          className='border-2'
+          className={errors.img && inputErrorClass}
           id='image'
         />
-      </label>
 
-      <div>
-        <label htmlFor='prepareTime'>
-          <p>Prepare Time (link)</p>
-          {errors.prepTime && <span>This field is required</span>}
-          <select
-            {...register('prepTime', { required: true })}
-            id='prepareTime'
-          >
-            <option value='0-15'>0-15</option>
-            <option value='16-30'>16-30</option>
-            <option value='31-45'>31-45</option>
-            <option value='46-60'>46-60</option>
-          </select>
-        </label>
+        <section className='grid grid-cols-2 gap-5 mb-5'>
+          <div>
+            <Label htmlFor='prepareTime'>
+              <p>
+                Prepare Time{' '}
+                <span className='text-xs lowercase'>(Minutes)</span>
+              </p>
+            </Label>
+            <select
+              {...register('prepTime', { required: true })}
+              id='prepareTime'
+              className='px-6 py-3'
+            >
+              <option value='0-15'>0 - 15</option>
+              <option value='16-30'>16 - 30</option>
+              <option value='31-45'>31 - 45</option>
+              <option value='46-60'>46 - 60</option>
+            </select>
+          </div>
 
-        <label htmlFor='cookTime'>
-          <p>Cook Time (link)</p>
-          {errors.cookTime && <span>This field is required</span>}
-          <select {...register('cookTime', { required: true })} id='cookTime'>
-            <option value='0-15'>0-15</option>
-            <option value='16-30'>16-30</option>
-            <option value='31-45'>31-45</option>
-            <option value='46-60'>46-60</option>
-          </select>
-        </label>
+          <div>
+            <Label htmlFor='cookTime'>
+              <p>
+                Cook Time <span className='text-xs lowercase'>(Minutes)</span>
+              </p>
+            </Label>
+            <select
+              {...register('cookTime', { required: true })}
+              id='cookTime'
+              className='px-6 py-3'
+            >
+              <option value='0-15'>0 - 15</option>
+              <option value='16-30'>16 - 30</option>
+              <option value='31-45'>31 - 45</option>
+              <option value='46-60'>46 - 60</option>
+            </select>
+          </div>
 
-        <label htmlFor='serves'>
-          <p>Serves</p>
-          {errors.serves && <span>This field is required</span>}
-          <select {...register('serves', { required: true })} id='serves'>
-            <option value='1-2'>1-2</option>
-            <option value='3-4'>3-4</option>
-            <option value='5-6'>5-6</option>
-            <option value='6+'>6+</option>
-          </select>
-        </label>
-      </div>
+          <div>
+            <Label htmlFor='serves'>
+              <p>Serves</p>
+            </Label>
+            <select
+              {...register('serves', { required: true })}
+              id='serves'
+              className='px-6 py-3'
+            >
+              <option value='1-2'>1 - 2</option>
+              <option value='3-4'>3 - 4</option>
+              <option value='5-6'>5 - 6</option>
+              <option value='6+'>6+</option>
+            </select>
+          </div>
+        </section>
 
-      <label htmlFor='ingredients'>
-        <p>Ingredients (Enter ingredients separate by ;)</p>
-        {errors.ingredients && <span>This field is required</span>}
-        <textarea
-          placeholder='ingredients'
+        <Label
+          htmlFor='ingredients'
+          className={errors.ingredients && labelErrorClass}
+        >
+          <p className={errors.ingredients && titleErrorClass}>
+            Ingredients{' '}
+            <span className='text-xs lowercase'>
+              (Enter ingredients separate by ;)
+            </span>
+          </p>
+        </Label>
+        {errors.ingredients && (
+          <ErrorMessage message={'Please list down the ingredients'} />
+        )}
+        <Textarea
+          placeholder='Ingredients list and seperate by ;'
           {...register('ingredients', { required: true })}
           id='ingredients'
+          className={errors.ingredients && inputErrorClass}
         />
-      </label>
 
-      <label htmlFor='instructions'>
-        <p>Instructions (Enter instructions separate by ;)</p>
-        {errors.instructions && <span>This field is required</span>}
-        <textarea
-          placeholder='instructions'
+        <Label
+          htmlFor='instructions'
+          className={errors.instructions && labelErrorClass}
+        >
+          <p className={errors.instructions && titleErrorClass}>
+            Instructions{' '}
+            <span className='text-xs lowercase'>
+              (Enter instructions separate by ;)
+            </span>
+          </p>
+        </Label>
+        {errors.instructions && (
+          <ErrorMessage message={'Please list down the instructions'} />
+        )}
+        <Textarea
+          placeholder='Instructions step and seperate by ;'
           {...register('instructions', { required: true })}
           id='instructions'
+          className={errors.instructions && inputErrorClass}
         />
-      </label>
 
-      <div>
-        <Link to='/'>Cancel</Link>
-        <input type='submit' />
-      </div>
-    </form>
+        <div className='flex justify-center gap-5'>
+          <Link to='/'>
+            <Button variant='destructive' size='lg'>
+              Cancel
+            </Button>
+          </Link>
+          <Button type='submit' size='lg'>
+            Submit
+          </Button>
+        </div>
+      </form>
+    </section>
   );
 };
 
