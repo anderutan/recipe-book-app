@@ -48,7 +48,7 @@ const EditRecipe = () => {
   return (
     <section className='w-full h-full min-h-screen max-w-screen-sm mx-auto py-10 px-6 bg-slate-200 rounded-lg my-10'>
       <h2 className='font-lora text-4xl font-semibold mb-5 text-center sm:text-5xl'>
-        Create New Recipe
+        Edit {state?.currentRecipe?.title}
       </h2>
       <FormProvider {...methods}>
         <form
@@ -86,7 +86,8 @@ const EditRecipe = () => {
           <div className='grid grid-cols-2 gap-5 mb-5 sm:grid-cols-3 items-center'>
             <FormField
               name='prepTime'
-              label='Prepare Time (Minutes)'
+              label='Prepare Time'
+              span='(Minutes)'
               as='select'
             >
               <option value='0-15'>0 - 15</option>
@@ -94,13 +95,23 @@ const EditRecipe = () => {
               <option value='31-45'>31 - 45</option>
               <option value='46-60'>46 - 60</option>
             </FormField>
-            <FormField name='cookTime' label='Cook Time (Minutes)' as='select'>
+            <FormField
+              name='cookTime'
+              label='Cook Time'
+              span='(Minutes)'
+              as='select'
+            >
               <option value='0-15'>0 - 15</option>
               <option value='16-30'>16 - 30</option>
               <option value='31-45'>31 - 45</option>
               <option value='46-60'>46 - 60</option>
             </FormField>
-            <FormField name='serves' label='Serves (No of People)' as='select'>
+            <FormField
+              name='serves'
+              label='Serves'
+              span='(No of People)'
+              as='select'
+            >
               <option value='1-2'>1 - 2</option>
               <option value='3-4'>3 - 4</option>
               <option value='5-6'>5 - 6</option>
@@ -109,14 +120,16 @@ const EditRecipe = () => {
           </div>
           <FormField
             name='ingredients'
-            label='Ingredients (Enter ingredients separate by ;)'
+            label='Ingredients'
+            span='(Enter ingredients separate by ;)'
             placeholder='Ingredients list and separate by ;'
             as='textarea'
             errorMsg='Please list down the ingredients'
           />
           <FormField
             name='instructions'
-            label='Instructions (Enter instructions separate by ;)'
+            label='Instructions'
+            span='(Enter instructions separate by ;)'
             placeholder='Instructions step and separate by ;'
             as='textarea'
             errorMsg='Please list down the instructions'

@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 interface FormFieldProps {
   name: string;
   label: string;
+  span?: string;
   placeholder?: string;
   children?: ReactNode;
   as?: 'input' | 'textarea' | 'select';
@@ -22,6 +23,7 @@ const ErrorMessage = ({ message }: { message: string }) => (
 const FormField: FC<FormFieldProps> = ({
   name,
   label,
+  span,
   placeholder,
   children,
   as = 'input',
@@ -45,7 +47,9 @@ const FormField: FC<FormFieldProps> = ({
   return (
     <div className='mb-4'>
       <Label htmlFor={name}>
-        <p className={error ? 'font-bold text-red-400' : ''}>{label}</p>
+        <p className={error ? 'font-bold text-red-400' : ''}>
+          {label} <span className='text-xs sm:text-base lowercase'>{span}</span>
+        </p>
       </Label>
       {error && <ErrorMessage message={errorMsg || 'This field is required'} />}
       {as === 'input' && <Input {...inputProps} />}
