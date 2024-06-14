@@ -42,10 +42,8 @@ const RecipeCard = ({ recipe }: Props) => {
         </CardContent>
         <CardFooter>
           <Link to={`/recipe/${recipe.id}`}>
-            <Button
-              variant='outline'
-              className='shadow-lg px-8 text-base sm:text-xl'
-            >
+            {/* update outline button design */}
+            <Button variant='outline' size='lg'>
               View recipe
             </Button>
           </Link>
