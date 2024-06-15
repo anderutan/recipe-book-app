@@ -10,35 +10,41 @@ type Props = {
 
 const RecipeInfo = ({ prepTime, cookTime, serves }: Props) => {
   return (
-    <section className='grid grid-cols-2 gap-3'>
-      <div className='flex'>
+    <div className='grid grid-cols-2 gap-6 mb-10 md:grid-cols-1 px-5'>
+      <div className='flex gap-5'>
         <div>
-          <LocalDiningOutlinedIcon />
+          <LocalDiningOutlinedIcon color='disabled' />
         </div>
         <div className='flex flex-col'>
-          <p>PREP</p>
-          <p>{prepTime} minutes</p>
+          <p className='font-semibold tracking-widest text-[#5C5C5C]/50 text-sm mb-2 md:text-base'>
+            PREP
+          </p>
+          <p className='text-lg leading-6 md:text-lg'>{prepTime} minutes</p>
         </div>
       </div>
-      <div className='flex'>
+      <div className='flex gap-5'>
         <div>
-          <AccessTimeIcon />
+          <AccessTimeIcon color='disabled' />
         </div>
         <div className='flex flex-col'>
-          <p>COOK</p>
-          <p>{cookTime} minutes</p>
+          <p className='font-semibold tracking-widest text-[#5C5C5C]/50 text-sm mb-2 md:text-base'>
+            COOK
+          </p>
+          <p className='text-lg leading-6 md:text-lg'>{cookTime} minutes</p>
         </div>
       </div>
-      <div className='flex'>
+      <div className='flex gap-5'>
         <div>
-          <PeopleIcon />
+          <PeopleIcon color='disabled' />
         </div>
         <div className='flex flex-col'>
-          <p>SERVES</p>
-          <p>{serves} people</p>
+          <p className='font-semibold tracking-widest text-[#5C5C5C]/50 text-sm mb-2 md:text-base'>
+            SERVES
+          </p>
+          <p className='text-lg leading-6 md:text-lg'>{serves} people</p>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
