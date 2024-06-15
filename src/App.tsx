@@ -5,17 +5,20 @@ import Recipe from './page/Recipe';
 import NewRecipe from './page/NewRecipe';
 import NotFound from './page/NotFound';
 import EditRecipe from './page/EditRecipe';
+import { NotificationProvider } from './context/NotificationContext';
 
 function App() {
   return (
     <RecipeProvider>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path='/recipe/:id' element={<Recipe />} />
-        <Route path='/recipe/:id/edit' element={<EditRecipe />} />
-        <Route path='/newrecipe' element={<NewRecipe />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+      <NotificationProvider>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path='/recipe/:id' element={<Recipe />} />
+          <Route path='/recipe/:id/edit' element={<EditRecipe />} />
+          <Route path='/newrecipe' element={<NewRecipe />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </NotificationProvider>
     </RecipeProvider>
   );
 }

@@ -6,10 +6,12 @@ import { fetchSpecificRecipe, updateRecipeData } from '../utils/actions';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import FormField from '../components/FormField';
+import { NotificationContext } from '@/context/NotificationContext';
 
 const EditRecipe = () => {
   const { id } = useParams<{ id: string }>();
   const { state, dispatch } = useContext(RecipeContext);
+  const { setNotification } = useContext(NotificationContext);
   const navigate = useNavigate();
 
   const methods = useForm<UpdateRecipeType>();
@@ -42,6 +44,7 @@ const EditRecipe = () => {
 
   const onSubmit: SubmitHandler<UpdateRecipeType> = (data) => {
     handleUpdateRecipe(data);
+    setNotification(`${data.title} is updated!`);
     navigate(`/recipe/${id}`);
   };
 

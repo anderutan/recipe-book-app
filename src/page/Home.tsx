@@ -6,11 +6,32 @@ import CircularLoading from '../components/CircularLoading';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { NotificationContext } from '@/context/NotificationContext';
 
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get('name') || '';
   const { state, dispatch } = useContext(RecipeContext);
+  const { notification, setNotification } = useContext(NotificationContext);
+
+  useEffect(() => {
+    if (notification) {
+      toast.success(notification, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Bounce,
+      });
+      setNotification(null);
+    }
+  }, [notification, setNotification]);
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.value;
@@ -55,6 +76,7 @@ const Home = () => {
       {filteredRecipes.map((recipe) => (
         <RecipeCard recipe={recipe} key={recipe.id} />
       ))}
+      <ToastContainer />
     </main>
   );
 };

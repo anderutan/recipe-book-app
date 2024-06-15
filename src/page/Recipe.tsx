@@ -8,18 +8,23 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Button } from '@/components/ui/button';
 import CheckboxList from '@/components/ui/CheckboxList';
 import useWindowDimensions from '@/utils/useWindowDimensions';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { NotificationContext } from '@/context/NotificationContext';
 
 const Recipe = () => {
   const { width } = useWindowDimensions();
   const recipeRef = useRef<HTMLDivElement | null>(null);
   const { id } = useParams();
   const { state, dispatch } = useContext(RecipeContext);
+  const { notification, setNotification } = useContext(NotificationContext);
   const navigate = useNavigate();
 
   const handleDelete = async () => {
     if (id) {
       const success: boolean = await deleteRecipeData(dispatch, id);
       if (success) {
+        setNotification(`${state.currentRecipe?.title} is deleted!`);
         navigate('/');
       }
     }
@@ -34,6 +39,23 @@ const Recipe = () => {
   }, [dispatch, id]);
 
   const { currentRecipe, loading, error } = state;
+
+  useEffect(() => {
+    if (notification) {
+      toast.success(notification, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Bounce,
+      });
+      setNotification(null);
+    }
+  }, [notification, setNotification]);
 
   return (
     <>
@@ -110,6 +132,7 @@ const Recipe = () => {
               </Button>
             </div>
           </article>
+          <ToastContainer />
         </>
       )}
     </>

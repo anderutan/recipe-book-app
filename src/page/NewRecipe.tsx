@@ -6,11 +6,13 @@ import { createRecipe } from '../utils/actions';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import FormField from '../components/FormField';
+import { NotificationContext } from '@/context/NotificationContext';
 
 const NewRecipe = () => {
   const methods = useForm<UpdateRecipeType>();
 
   const { dispatch } = useContext(RecipeContext);
+  const { setNotification } = useContext(NotificationContext);
   const navigate = useNavigate();
 
   const handleCreateRecipe = (data: UpdateRecipeType) => {
@@ -19,6 +21,7 @@ const NewRecipe = () => {
 
   const onSubmit: SubmitHandler<UpdateRecipeType> = (data) => {
     handleCreateRecipe(data);
+    setNotification(`You created ${data.title} recipe!`);
     navigate('/');
   };
 
